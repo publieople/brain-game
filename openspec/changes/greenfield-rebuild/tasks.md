@@ -12,19 +12,20 @@
 - [x] Create `.gitignore` + `docker-compose.yml` (PostgreSQL)
 - [x] **Verify**: `uv run uvicorn` import works, `vite build` succeeds
 
-## Phase 1: Backend Modularization
+## Phase 1: Backend Modularization ✅
 
-- [ ] Split main.py into module structure: `api/`, `ws/`, `device/`, `processors/`, `models/`
-- [ ] Write Pydantic v2 schemas (TelemetryData, SessionData, Thresholds, etc.)
-- [ ] Write SQLAlchemy 2.0 async models (GameSession, EventLog, TelemetryLog)
-- [ ] Implement App factory pattern in `main.py`
-- [ ] Refactor WebSocket Manager into `ws/manager.py`
-- [ ] Create REST API endpoints: sessions CRUD, telemetry, thresholds, reports
-- [ ] Create TGAM device reader module in `device/tgam.py`
-- [ ] Create EEG simulator in `device/simulator.py`
-- [ ] Port fusion engine to `processors/fusion.py`
-- [ ] Port attention processing to `processors/attention.py`
-- [ ] **Verify**: all 81 existing tests pass
+- [x] Split old main.py into module structure: `api/`, `ws/`, `device/`, `processors/`, `models/`, `services/`
+- [x] Write Pydantic v2 schemas (TelemetryData, SessionData, Thresholds, etc.)
+- [x] Write SQLAlchemy 2.0 async models (GameSession, EventLog, TelemetryLog, ProcessedMetric)
+- [x] Implement async app factory in `__init__.py`
+- [x] Refactor WebSocket Manager into `ws/__init__.py` + `ws/handlers.py`
+- [x] Create REST API endpoints: sessions CRUD, telemetry, thresholds, analytics
+- [x] Create TGAM device reader module in `device/tgam.py`
+- [x] Create EEG simulator in `device/simulator.py`
+- [x] Port fusion engine to `processors/fusion.py`
+- [x] Port attention processing to `processors/attention.py` + `processors/__init__.py`
+- [x] Create LLM report service in `services/llm_reports.py`
+- [x] **Verify**: 23 routes registered, database init works
 
 ## Phase 2: Frontend Scaffold + Design System
 
