@@ -19,7 +19,9 @@ export interface UseEEGReturn {
   setMode: (mode: string) => void
 }
 
-const WS_BASE = `ws://${window.location.hostname}:8000`
+// Uses relative path — Vite proxy forwards /ws/* to backend in dev
+// In production, FastAPI serves both frontend SPA and WS on the same port
+const WS_BASE = ''
 
 export function useEEG(enabled: boolean = true): UseEEGReturn {
   const [eeg, setEEG] = useState<EEGData>({

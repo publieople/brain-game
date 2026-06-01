@@ -4,9 +4,9 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from brain_game.api.router import api_router
@@ -55,19 +55,7 @@ def create_app() -> FastAPI:
         app.mount("/assets", StaticFiles(directory=str(STATIC_DIR / "assets")), name="assets")
         app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-    # SPA fallback — serve index.html for all non-API, non-WS routes
-    SPA_INDEX = STATIC_DIR / "index.html"
-    if SPA_INDEX.exists():
-
-        @app.get("/{full_path:path}")
-        async def serve_spa(full_path: str):
-            # Skip API, WS, and control paths
-            if full_path.startswith(("api/", "ws/", "control")):
-                from fastapi.responses import JSONResponse
-                return JSONResponse({"error": "Not found"}, status_code=404)
-            return FileResponse(str(SPA_INDEX))
-
-    # Health check
+    # Health check (before SPA fallback to ensure correct routing)
     @app.get("/")
     async def root():
         return {"status": "ok", "service": "Brain Game Server", "version": "0.2.0"}
@@ -90,6 +78,16 @@ def create_app() -> FastAPI:
     async def save_score(player_name: str, score: int, avg_attention: float):
         report = _evaluate_performance(avg_attention, score)
         return {"status": "success", "report": report}
+
+    # SPA fallback — catch-all for frontend client-side routes
+    SPA_INDEX = STATIC_DIR / "index.html"
+    if SPA_INDEX.exists():
+        @app.api_route("/{full_path:path}", methods=["GET"])
+        async def serve_spa(full_path: str):
+            # Frontend route prefixes that React Router handles
+            if full_path.startswith(("play/", "dashboard", "favicon", "icons")):
+                return FileResponse(str(SPA_INDEX))
+            return JSONResponse({"error": "Not found"}, status_code=404)
 
     return app
 
