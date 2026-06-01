@@ -1,0 +1,21 @@
+[project]
+name = "brain-game-backend"
+version = "0.2.0"
+description = "Brain-Game Backend — EEG fusion control server"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "aiosqlite>=0.20.0",
+    "psycopg2-binary>=2.9.10",
+    "pyserial>=3.5",
+    "python-dotenv>=1.0.0",
+    "openai>=1.12.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
