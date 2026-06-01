@@ -27,20 +27,20 @@
 - [x] Create LLM report service in `services/llm_reports.py`
 - [x] **Verify**: 23 routes registered, database init works
 
-## Phase 2: Frontend Scaffold + Design System
+## Phase 2: Frontend Scaffold + Design System ✅
 
-- [ ] Set up Vite 8 + React 19 + TS 5 + Tailwind v4
-- [ ] Configure Tailwind with fluid-glass tokens (colors, glass layers, blur, radius, shadows)
-- [ ] Implement `<FluidBg>` animated background component
-- [ ] Implement `<GlassPanel>` / `<GlassPanelElevated>` / `<GlassPanelSubtle>` components
-- [ ] Implement `<Button>` with variants: primary, accent, danger, ghost
-- [ ] Implement `<Badge>` with variants: active, recommended, focus
-- [ ] Implement `<FormInput>`, `<Slider>`, `<Modal>` components
-- [ ] Implement `<Sidebar>` with collapse/expand animation
-- [ ] Set up React Router (`/`, `/play/star_raid`, `/play/archery`, `/play/reading`, `/dashboard`)
-- [ ] Create `useWebSocket` hook (auto-reconnect, JSON parse, connection state)
-- [ ] Create API client module (`lib/api.ts`)
-- [ ] **Verify**: all components render, router works, sidebar toggles
+- [x] Set up Vite 8 + React 19 + TS 5 + Tailwind v4
+- [x] Configure Tailwind with fluid-glass tokens (colors, glass layers, blur, radius, shadows)
+- [x] Implement `<FluidBg>` animated background component
+- [x] Implement `<GlassPanel>` / `<GlassPanelElevated>` / `<GlassPanelSubtle>` components
+- [x] Implement `<Button>` with variants: primary, accent, danger, ghost
+- [x] Implement `<Badge>` with variants: active, recommended, focus
+- [x] Implement `<FormInput>`, `<Slider>`, `<Modal>` components
+- [x] Implement `<Sidebar>` with collapse/expand animation
+- [x] Set up React Router (`/`, `/play/star_raid`, `/play/archery`, `/play/reading`, `/dashboard`)
+- [x] Create `useWebSocket` hook (auto-reconnect, JSON parse, connection state)
+- [x] Create API client module (`lib/api.ts`)
+- [x] **Verify**: `vite build` succeeds, Portal renders all components
 
 ## Phase 3: Portal Page
 
