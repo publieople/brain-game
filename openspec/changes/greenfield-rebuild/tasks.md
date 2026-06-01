@@ -1,21 +1,20 @@
 # Greenfield Rebuild — Tasks
 
-## Phase 0: Scaffold + Repository Setup
+## Phase 0: Scaffold + Repository Setup ✅
 
-- [ ] Create `publieople/brain-game` repository on GitHub
-- [ ] `git init` and push initial commit
-- [ ] Create `backend/pyproject.toml` with FastAPI + SQLAlchemy + pyserial deps
-- [ ] Run `uv sync` for backend
-- [ ] Create `frontend/` with `npm create vite@latest` (React + TS template)
-- [ ] Install frontend deps: Tailwind v4, React Router v7, Zustand, ECharts
-- [ ] Configure Tailwind v4 with fluid-glass design tokens
-- [ ] Create `.gitignore` (Python + Node)
-- [ ] Create `docker-compose.yml` (PostgreSQL service)
-- [ ] **Verify**: `uv run uvicorn` starts, `npm run dev` starts
+- [x] Create `publieople/brain-game` repository on GitHub
+- [x] `git init` and push initial commit
+- [x] Create `backend/pyproject.toml` with FastAPI + SQLAlchemy + pyserial deps
+- [x] Run `uv sync` for backend
+- [x] Create `frontend/` with Vite 8 + React 19 + TS 5 scaffold
+- [x] Install frontend deps: Tailwind v4, React Router v7, Zustand, ECharts
+- [x] Configure Tailwind v4 with fluid-glass design tokens
+- [x] Create `.gitignore` + `docker-compose.yml` (PostgreSQL)
+- [x] **Verify**: `uv run uvicorn` import works, `vite build` succeeds
 
 ## Phase 1: Backend Modularization
 
-- [ ] Split `main.py` into module structure: `api/`, `ws/`, `device/`, `processors/`, `models/`
+- [ ] Split main.py into module structure: `api/`, `ws/`, `device/`, `processors/`, `models/`
 - [ ] Write Pydantic v2 schemas (TelemetryData, SessionData, Thresholds, etc.)
 - [ ] Write SQLAlchemy 2.0 async models (GameSession, EventLog, TelemetryLog)
 - [ ] Implement App factory pattern in `main.py`

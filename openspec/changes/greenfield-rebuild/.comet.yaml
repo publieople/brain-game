@@ -6,7 +6,7 @@ verify_mode: light
 verify_result: pending
 verified_at: ""
 archived: false
-branch_status: pending
+branch_status: handled
 direct_override: false
 design_doc: docs/superpowers/specs/2026-06-01-brain-game-migration-design.md
 plan: docs/superpowers/plans/2026-06-01-phase-0-scaffold.md
