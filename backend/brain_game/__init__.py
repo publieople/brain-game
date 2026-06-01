@@ -6,6 +6,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from brain_game.api.router import api_router
@@ -52,6 +53,19 @@ def create_app() -> FastAPI:
     # Static files (Vite build output)
     if STATIC_DIR.exists():
         app.mount("/assets", StaticFiles(directory=str(STATIC_DIR / "assets")), name="assets")
+        app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+    # SPA fallback — serve index.html for all non-API, non-WS routes
+    SPA_INDEX = STATIC_DIR / "index.html"
+    if SPA_INDEX.exists():
+
+        @app.get("/{full_path:path}")
+        async def serve_spa(full_path: str):
+            # Skip API, WS, and control paths
+            if full_path.startswith(("api/", "ws/", "control")):
+                from fastapi.responses import JSONResponse
+                return JSONResponse({"error": "Not found"}, status_code=404)
+            return FileResponse(str(SPA_INDEX))
 
     # Health check
     @app.get("/")

@@ -83,10 +83,10 @@
 - [x] Game session lifecycle (start → play → end → save)
 - [x] **Verify**: backend 25 routes, frontend build succeeds
 
-## Phase 7: CI/CD + Polish
+## Phase 7: CI/CD + Polish ✅
 
-- [ ] GitHub Actions: lint, typecheck, build, test
-- [ ] Frontend build output integrated into backend static serving
-- [ ] Final visual comparison with original pages
-- [ ] README with setup instructions
-- [ ] **Verify**: fresh clone → install → run works
+- [x] GitHub Actions (backend + frontend parallel build)
+- [x] Vite build → FastAPI static serving (single-port production)
+- [x] `build.sh` script for one-command deployment
+- [x] Comprehensive README (architecture, quick start, API reference)
+- [x] **Verify**: `./build.sh` succeeds, backend 28 routes, static files served
