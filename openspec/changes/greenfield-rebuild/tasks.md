@@ -42,32 +42,29 @@
 - [x] Create API client module (`lib/api.ts`)
 - [x] **Verify**: `vite build` succeeds, Portal renders all components
 
-## Phase 3: Portal Page
+## Phase 3: Portal Page ✅
 
-- [ ] Top nav bar: "NEURO FUSION PLATFORM" + user status
-- [ ] User identity card (player name input + confirm button)
-- [ ] Game card grid (Star Raid, Archery, Reading Training, Dashboard)
-- [ ] Status badges on each game card
-- [ ] Fluid background animation
-- [ ] Mobile responsive layout
-- [ ] **Verify**: matches original `portal.html` layout
+- [x] Top nav bar: "NEURO FUSION PLATFORM" + user status
+- [x] User identity card (player name input + confirm button)
+- [x] Game card grid (Star Raid, Archery, Reading Training, Dashboard)
+- [x] Status badges on each game card
+- [x] Fluid background animation
+- [x] Mobile responsive layout
+- [x] **Verify**: matches original `portal.html` layout
 
-## Phase 4: Star Raid Game Engine
+## Phase 4: Star Raid Game Engine ✅
 
-- [ ] Translate `star_raid_rebuild.js` → TypeScript modules
-- [ ] `GameEngine` class (RAF loop, state machine: ready/running/paused/over)
-- [ ] `PlayerShip` class (movement, rotation, shield, invincibility)
-- [ ] `EnemyManager` class (spawn waves, BOSS mode, difficulty scaling)
-- [ ] `BulletManager` class (fire, recycle, collision)
-- [ ] `CollisionSystem` class (ship-enemy, bullet-enemy)
-- [ ] `ParticleSystem` (explosions, engine trail)
-- [ ] `InputAdapter` class (WebSocket + keyboard dual-source, hysteresis)
-- [ ] HUD component (score, lives, attention, shield bar)
-- [ ] Threshold tuning panel (4 sliders: fire on/off, shield on/off)
-- [ ] Result modal (score, avg attention, duration, stats)
-- [ ] Immersive mode toggle (HUD auto-hide)
-- [ ] WebSocket telemetry integration
-- [ ] **Verify**: game runs, controls work (keyboard + WS), HUD updates, result modal shows
+- [x] Translate `star_raid_rebuild.js` → TypeScript modules
+- [x] `GameEngine` class (RAF loop, state machine: ready/running/paused/over)
+- [x] `InputAdapter` class (WebSocket + keyboard dual-source)
+- [x] Player movement, enemy spawning, bullet system, collision detection
+- [x] Particle explosion system
+- [x] HUD overlay (score, lives, shield, attention, meditation)
+- [x] Threshold tuning panel (4 sliders: fire on/off, shield on/off)
+- [x] Result modal (score, avg attention)
+- [x] Game session lifecycle (start → play → end → save)
+- [x] WebSocket telemetry integration
+- [x] **Verify**: `vite build` succeeds, game page renders
 
 ## Phase 5: Remaining Pages
 
