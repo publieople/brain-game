@@ -6,6 +6,7 @@ import { GameEngine } from '../game/engine'
 import { InputAdapter } from '../game/input-adapter'
 import type { HUDData } from '../game/types'
 import * as api from '../lib/api'
+import { useEEG } from '../hooks/useEEG'
 
 function resolvePlayerName(): string {
   const params = new URLSearchParams(window.location.search)
@@ -38,6 +39,9 @@ export default function StarRaid() {
   const [thresholds, setThresholds] = useState<api.ThresholdConfig>(DEFAULT_THRESHOLDS)
   const [thresholdMsg, setThresholdMsg] = useState('')
 
+  // Connect to EEG stream
+  const { eeg, status } = useEEG(true)
+
   // Init game engine
   useEffect(() => {
     const canvas = canvasRef.current
@@ -54,6 +58,9 @@ export default function StarRaid() {
       setResultAttention(avgAttention)
       setResultOpen(true)
     }
+
+    // Wire WS connection status to input adapter
+    input.wsConnected = true
 
     engineRef.current = engine
     inputRef.current = input
@@ -118,6 +125,14 @@ export default function StarRaid() {
       setThresholdMsg('重置失败')
     }
   }, [])
+
+  // Feed EEG data into game engine
+  useEffect(() => {
+    const input = inputRef.current
+    if (!input) return
+    input.feedEEG(eeg.attention, eeg.meditation)
+    input.wsConnected = status === 'connected'
+  }, [eeg.attention, eeg.meditation, status])
 
   // Keyboard: Enter to start/resume
   useEffect(() => {

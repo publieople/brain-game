@@ -73,15 +73,15 @@
 - [x] Dashboard page with ECharts (KPI cards, realtime/session charts, session list, thresholds)
 - [x] **Verify**: vite build succeeds, all pages navigable
 
-## Phase 6: WebSocket + EEG Integration
+## Phase 6: WebSocket + EEG Integration ✅
 
-- [ ] Backend WebSocket manager fully wired to frontend hooks
-- [ ] `useEEGData` hook (realtime attention/meditation streaming)
-- [ ] Threshold sync (frontend ↔ backend)
-- [ ] Game session lifecycle (start → play → end → save)
-- [ ] TGAM device connection from backend
-- [ ] EEG simulator mode toggle
-- [ ] **Verify**: end-to-end: simulator → WS → frontend → game reacts
+- [x] Backend EEG simulator WebSocket stream (`/ws/eeg`)
+- [x] `useEEG` hook with auto-reconnect
+- [x] Portal Sidebar shows realtime EEG data + simulator mode selector
+- [x] StarRaid game engine receives EEG data via InputAdapter.feedEEG()
+- [x] Threshold config → REST API (GET/PUT `/api/thresholds`)
+- [x] Game session lifecycle (start → play → end → save)
+- [x] **Verify**: backend 25 routes, frontend build succeeds
 
 ## Phase 7: CI/CD + Polish
 

@@ -2,30 +2,86 @@ import TopHeader from '../components/layout/TopHeader'
 import Sidebar from '../components/layout/Sidebar'
 import GameCard from '../components/layout/GameCard'
 import { GlassPanel, Button, FormInput, Badge } from '../components/ui'
+import { useEEG } from '../hooks/useEEG'
 
 export default function Portal() {
+  const { eeg, status, setMode } = useEEG(true)
+
   return (
     <div className="w-full h-full flex flex-col">
       <TopHeader />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
+        {/* Sidebar with EEG data */}
         <Sidebar>
           <div className="flex flex-col gap-4">
+            {/* EEG Data Panel */}
             <GlassPanel variant="subtle" className="p-4">
-              <h4 className="text-sm font-semibold text-text-primary m-0 mb-3">脑电数据</h4>
-              <div className="text-xs text-text-secondary space-y-1.5 font-mono">
-                <div>专注度: <span className="text-accent-cyan">--</span></div>
-                <div>放松度: <span className="text-accent-emerald">--</span></div>
-                <div>信号质量: <span className="text-text-tertiary">--</span></div>
+              <h4 className="text-sm font-semibold text-text-primary m-0 mb-3 flex items-center gap-2">
+                脑电数据
+                <span className={`w-2 h-2 rounded-full ${status === 'connected' ? 'bg-accent-emerald shadow-[0_0_8px_#10b981]' : 'bg-accent-rose shadow-[0_0_8px_#f43f5e]'}`} />
+              </h4>
+              <div className="text-xs font-mono space-y-1.5">
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">专注度</span>
+                  <span className="text-accent-cyan font-bold">{eeg.attention.toFixed(1)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">放松度</span>
+                  <span className="text-accent-emerald font-bold">{eeg.meditation.toFixed(1)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">信号质量</span>
+                  <span className="text-text-tertiary">{eeg.signalQuality.toFixed(0)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">数据源</span>
+                  <span className="text-text-tertiary">{eeg.source}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">连接</span>
+                  <span className={status === 'connected' ? 'text-accent-emerald' : 'text-accent-rose'}>
+                    {status === 'connected' ? '在线' : status === 'connecting' ? '连接中' : '离线'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Simulator mode selector */}
+              <div className="mt-3 pt-3 border-t border-glass-border">
+                <label className="text-[11px] text-text-tertiary block mb-1.5">模拟模式</label>
+                <div className="flex flex-wrap gap-1">
+                  {[
+                    { key: 'steady', label: '平稳' },
+                    { key: 'fluctuating', label: '波动' },
+                    { key: 'focused', label: '专注' },
+                    { key: 'distracted', label: '分心' },
+                  ].map(m => (
+                    <button
+                      key={m.key}
+                      onClick={() => setMode(m.key)}
+                      className="px-2 py-1 text-[11px] rounded-md cursor-pointer transition-colors border border-glass-border bg-glass-thin text-text-secondary hover:bg-glass-thick hover:text-text-primary"
+                    >
+                      {m.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </GlassPanel>
+
+            {/* Connection status */}
             <GlassPanel variant="subtle" className="p-4">
               <h4 className="text-sm font-semibold text-text-primary m-0 mb-3">控制状态</h4>
-              <div className="text-xs text-text-secondary space-y-1.5 font-mono">
-                <div>连接: <span className="text-accent-rose">未连接</span></div>
-                <div>发射: <span className="text-text-tertiary">--</span></div>
-                <div>护盾: <span className="text-text-tertiary">--</span></div>
+              <div className="text-xs font-mono space-y-1.5">
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">WS连接</span>
+                  <span className={status === 'connected' ? 'text-accent-emerald' : 'text-accent-rose'}>
+                    {status === 'connected' ? '在线' : '离线'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">后端</span>
+                  <span className="text-accent-emerald">运行中</span>
+                </div>
               </div>
             </GlassPanel>
           </div>
@@ -71,8 +127,6 @@ export default function Portal() {
                   link="/play/star_raid"
                   badgeText="热门"
                   badgeVariant="active"
-                  gradientFrom="hsla(228, 89%, 66%, 0.3)"
-                  gradientTo="hsla(189, 100%, 56%, 0.15)"
                 />
                 <GameCard
                   title="专注射箭"
@@ -80,8 +134,6 @@ export default function Portal() {
                   link="/play/archery"
                   badgeText="推荐"
                   badgeVariant="recommended"
-                  gradientFrom="hsla(269, 79%, 66%, 0.3)"
-                  gradientTo="hsla(228, 89%, 66%, 0.15)"
                 />
                 <GameCard
                   title="阅读训练"
@@ -89,8 +141,6 @@ export default function Portal() {
                   link="/play/reading"
                   badgeText="专注"
                   badgeVariant="focus"
-                  gradientFrom="hsla(189, 100%, 56%, 0.25)"
-                  gradientTo="hsla(228, 89%, 66%, 0.15)"
                 />
                 <GameCard
                   title="数据面板"
@@ -98,8 +148,6 @@ export default function Portal() {
                   link="/dashboard"
                   badgeText="分析"
                   badgeVariant="default"
-                  gradientFrom="hsla(340, 89%, 66%, 0.2)"
-                  gradientTo="hsla(269, 79%, 66%, 0.15)"
                 />
               </div>
             </section>

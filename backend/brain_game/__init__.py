@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from brain_game.api.router import api_router
 from brain_game.models import init_db
 from brain_game.ws.handlers import router as ws_router
+from brain_game.ws.eeg_stream import router as eeg_router
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +47,7 @@ def create_app() -> FastAPI:
 
     # WebSocket routes
     app.include_router(ws_router)
+    app.include_router(eeg_router)
 
     # Static files (Vite build output)
     if STATIC_DIR.exists():
