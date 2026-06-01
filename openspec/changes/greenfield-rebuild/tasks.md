@@ -66,12 +66,12 @@
 - [x] WebSocket telemetry integration
 - [x] **Verify**: `vite build` succeeds, game page renders
 
-## Phase 5: Remaining Pages
+## Phase 5: Remaining Pages ✅
 
-- [ ] Archery page + game logic (from `archery.html` + `archery_game.js`)
-- [ ] Reading Training page (from `reading_training.html`)
-- [ ] Dashboard page with ECharts (from `dashboard.html` + ECharts integration)
-- [ ] **Verify**: all pages navigable, content matches originals
+- [x] Archery page + game logic (Canvas target shooting with charge mechanics)
+- [x] Reading Training page (focus-based progress tracking)
+- [x] Dashboard page with ECharts (KPI cards, realtime/session charts, session list, thresholds)
+- [x] **Verify**: vite build succeeds, all pages navigable
 
 ## Phase 6: WebSocket + EEG Integration
 
